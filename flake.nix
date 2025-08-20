@@ -95,7 +95,7 @@
   outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, ... }:
     # Variables
     let
-      username = "egarcia";
+      username = "jonathanrg";
     in {
       nixosConfigurations = (
         # Imports ./hosts/default.nix module

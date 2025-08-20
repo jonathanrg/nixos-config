@@ -144,10 +144,6 @@
       firefox
       google-chrome
       kdePackages.okular
-      #qmmp
-      pkgs-stable.qmmp
-      pkgs-stable.audacity
-      pkgs-stable.carla
       nano
       #tailscale
       libreoffice
@@ -173,9 +169,7 @@
       vlc
       telegram-desktop
       pkgs-stable.insync
-      filezilla
       pciutils
-      spotify
       bind
       encfs
       #pkgs-stable.quickemu
@@ -184,10 +178,6 @@
       quickgui
       yt-dlp
       openconnect # For VPN extranet
-      kubectl
-      kubie
-      kubecolor
-      minikube
       usbutils
       transmission_4-gtk
       inputs.wallpaperdownloader.packages.x86_64-linux.default
@@ -198,12 +188,9 @@
       tcpdump
       wireshark
       killall
-      protonvpn-gui
       gemini-cli
       gradia
-      posting
-      k9s
-      glxinfo
+      postman
       buttermanager
   ];
 
@@ -282,10 +269,10 @@
   };
 
   # Copying display manager avatars for every user
-  system.activationScripts.script.text = ''
-    mkdir -p /var/lib/AccountsService/icons/
-    cp /home/egarcia/Zero/nixos-config/modules/display-manager/avatars/egarcia.png /var/lib/AccountsService/icons/egarcia
-  '';
+  #system.activationScripts.script.text = ''
+  #  mkdir -p /var/lib/AccountsService/icons/
+  #  cp /home/jonathanrg/Zero/nixos-config/modules/display-manager/avatars/jonathan.png /var/lib/AccountsService/icons/jonathan
+  #'';
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -302,62 +289,6 @@
     dina-font
     proggyfonts
   ];
-
-########################################
-# Testing Stylix
-########################################
-#  # Global styling with Stylix
-#  stylix = {
-#  	# Dark theme
-#  	polarity = "dark";
-#
-#  	# Color scheme
-#	base16Scheme = "${pkgs.base16-schemes}/share/themes/material-darker.yaml";
-#
-#	# Is this mandatory?
-#	image = ../modules/display-manager/avatars/egarcia.png;
-#
-#	# Cursors
-#	cursor = {
-#	    package = pkgs.bibata-cursors;
-#	    name = "Bibata-Modern-Classic";
-#	    size = 10;
-#	};
-#
-#	# Targets
-#	targets = {
-#		grub = {
-#			enable = false;
-#		};
-#
-#		gtk = {
-#			enable = true;
-#		};
-#	};
-#
-#	# Fonts
-# 	fonts = {
-#    	monospace = {
-#      		package = pkgs.nerdfonts;
-#      		name = "GoMonoNerdFontPropo-Bold";
-#    	};
-#
-#    	serif = config.stylix.fonts.monospace;
-#    	sansSerif = config.stylix.fonts.monospace;
-#
-#
-#        emoji = {
-#      		package = pkgs.noto-fonts-emoji;
-#      		name = "Noto Color Emoji";
-#    	};
-#
-#    	sizes = {
-#    		applications = 10;
-#    		desktop = 10;
-#    	};
-#  	};
-#
-#  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

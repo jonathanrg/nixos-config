@@ -12,7 +12,7 @@
 set -euo pipefail
 
 TARGET_HOST="${1:-}"
-TARGET_USER="${2:-egarcia}"
+TARGET_USER="${2:-jonathanrg}"
 
 if [ "$(id -u)" -eq 0 ]; then
   echo "ERROR! $(basename "$0") should be run as a regular user"
@@ -20,7 +20,7 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 if [ ! -d "$HOME/Zero/nixos-config/.git" ]; then
-  git clone https://github.com/egara/nixos-config.git "$HOME/Zero/nixos-config"
+  git clone https://github.com/jonathanrg/nixos-config.git "$HOME/Zero/nixos-config"
 fi
 
 pushd "$HOME/Zero/nixos-config"
@@ -65,5 +65,5 @@ sudo nixos-install --no-root-password --flake ".#$TARGET_HOST"
 # Rsync nix-config to the target install and set the remote origin to SSH.
 rsync -a --delete "$HOME/Zero/" "/mnt/home/$TARGET_USER/Zero/"
 pushd "/mnt/home/$TARGET_USER/Zero/nixos-config"
-git remote set-url origin git@github.com:egara/nixos-config.git
+git remote set-url origin git@github.com:jonathanrg/nixos-config.git
 popd
