@@ -143,6 +143,7 @@
       nvd    # NixOS package version diff tool
       firefox
       google-chrome
+      librewolf
       kdePackages.okular
       nano
       #tailscale
@@ -190,8 +191,12 @@
       killall
       gemini-cli
       gradia
+      bluez-tools
       postman
       buttermanager
+      apache-directory-studio
+      eclipses.eclipse-jee
+      jdk8
   ];
 
   # List of programs that must be enabled
