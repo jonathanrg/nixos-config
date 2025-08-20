@@ -7,17 +7,17 @@ I'm really new at NixOS and I want to experiment and learn about it step by step
 - Boot the system using NixOS live USB
 - Execute the installation script which is located in **scripts/install.sh**
 
-      curl -sL https://raw.githubusercontent.com/egara/nixos-config/main/scripts/install.sh | bash -s <hostname> <username>
+      curl -sL https://raw.githubusercontent.com/jonathanrg/nixos-config/main/scripts/install.sh | bash -s <hostname> <username>
       
 
 Please, change **hostname** and **username** by one of their accepted values:
 
 - hostname: [vm, rocket-hyprland, rocket-plasma, ironman-hyprland, ironman-plasma]
-- username: egarcia
+- username: jonathanrg
 
 This script will:
 
-1. Clone this repository [https://github.com/egara/nixos-config.git](https://github.com/egara/nixos-config.git)
+1. Clone this repository [https://github.com/jonathanrg/nixos-config.git](https://github.com/jonathanrg/nixos-config.git)
 1. Format and create all the needed partitions using [Disko](https://github.com/nix-community/disko)
 1. Install NixOS
 1. Copy this repo into the new installed system
@@ -40,7 +40,7 @@ It will give you:
 
 ### Rocket
 
-This is intended to be installed on a my old PC. Please, bear in mind that the configuration created here is very specific and depends on the hardware of this computer. You can see this hardware dependent configurations here [https://github.com/egara/nixos-config/blob/main/hosts/rocket/configuration.nix](https://github.com/egara/nixos-config/blob/main/hosts/rocket/configuration.nix) and here [https://github.com/egara/nixos-config/blob/main/hosts/rocket/hardware-configuration.nix](https://github.com/egara/nixos-config/blob/main/hosts/rocket/hardware-configuration.nix)
+This is intended to be installed on a my old PC. Please, bear in mind that the configuration created here is very specific and depends on the hardware of this computer. You can see this hardware dependent configurations here [https://github.com/jonathanrg/nixos-config/blob/main/hosts/rocket/configuration.nix](https://github.com/jonathanrg/nixos-config/blob/main/hosts/rocket/configuration.nix) and here [https://github.com/jonathanrg/nixos-config/blob/main/hosts/rocket/hardware-configuration.nix](https://github.com/jonathanrg/nixos-config/blob/main/hosts/rocket/hardware-configuration.nix)
 
 There are two different profiles:
 
@@ -56,7 +56,7 @@ There are two different profiles:
 
       It will give you:
 
-            - A very advanced NixOS installation customized for Hyprland. Check all the extra packages installed here [https://github.com/egara/nixos-config/blob/main/modules/desktop/hyprland.nix](https://github.com/egara/nixos-config/blob/main/modules/desktop/hyprland.nix) to get a flawless experience with Hyprland
+            - A very advanced NixOS installation customized for Hyprland. Check all the extra packages installed here [https://github.com/jonathanrg/nixos-config/blob/main/modules/desktop/hyprland.nix](https://github.com/jonathanrg/nixos-config/blob/main/modules/desktop/hyprland.nix) to get a flawless experience with Hyprland
 
             - All the configuration files for the different pieces of software that contribute with this flawless experience via Home-Manager
 
@@ -64,7 +64,7 @@ There are two different profiles:
 
 ### Ironman
 
-This is intended to be installed on my current laptop. Please, bear in mind that the configuration created here is very specific and depends on the hardware of this computer. You can see this hardware dependent configurations here [https://github.com/egara/nixos-config/blob/main/hosts/ironman/configuration.nix](https://github.com/egara/nixos-config/blob/main/hosts/ironman/configuration.nix) and here [https://github.com/egara/nixos-config/blob/main/hosts/ironman/hardware-configuration.nix](https://github.com/egara/nixos-config/blob/main/hosts/ironman/hardware-configuration.nix)
+This is intended to be installed on my current laptop. Please, bear in mind that the configuration created here is very specific and depends on the hardware of this computer. You can see this hardware dependent configurations here [https://github.com/jonathanrg/nixos-config/blob/main/hosts/ironman/configuration.nix](https://github.com/jonathanrg/nixos-config/blob/main/hosts/ironman/configuration.nix) and here [https://github.com/jonathanrg/nixos-config/blob/main/hosts/ironman/hardware-configuration.nix](https://github.com/jonathanrg/nixos-config/blob/main/hosts/ironman/hardware-configuration.nix)
 
 There are two different profiles:
 
@@ -80,7 +80,7 @@ There are two different profiles:
 
       It will give you:
 
-            - A very advanced NixOS installation customized for Hyprland. Check all the extra packages installed here [https://github.com/egara/nixos-config/blob/main/modules/desktop/hyprland.nix](https://github.com/egara/nixos-config/blob/main/modules/desktop/hyprland.nix) to get a flawless experience with Hyprland
+            - A very advanced NixOS installation customized for Hyprland. Check all the extra packages installed here [https://github.com/jonathanrg/nixos-config/blob/main/modules/desktop/hyprland.nix](https://github.com/jonathanrg/nixos-config/blob/main/modules/desktop/hyprland.nix) to get a flawless experience with Hyprland
 
             - All the configuration files for the different pieces of software that contribute with this flawless experience via Home-Manager
 

@@ -100,7 +100,7 @@
   users.users.${username} = {
     password = "administrador";
     isNormalUser = true;
-    description = "Eloy";
+    description = "Jonathan";
     extraGroups = [ 
       "wheel" 
       "video" 
