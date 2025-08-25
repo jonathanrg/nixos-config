@@ -198,7 +198,7 @@
       eclipses.eclipse-jee
       jdk8
       fish
-      virtualboxExtpack
+      virtualboxWithExtpack
   ];
 
   # List of programs that must be enabled
