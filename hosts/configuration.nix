@@ -197,6 +197,8 @@
       apache-directory-studio
       eclipses.eclipse-jee
       jdk8
+      fish
+      virtualboxExtpack
   ];
 
   # List of programs that must be enabled
@@ -232,6 +234,7 @@
     # KVM-QUEMU and Virtual Manager
     libvirtd = {
       enable = true;
+      qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
     };
 
     # Allow SPICE USB redirection for USB passthrough in QEMU

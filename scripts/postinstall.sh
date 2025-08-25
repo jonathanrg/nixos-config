@@ -50,10 +50,10 @@ pushd "$HOME"
 
 # Executing yadm in order to get all personal configurations for different applications
 echo "Cloning yamd repository and applying custom bootstrap script"
-yadm clone --bootstrap https://egara:$YADM_TOKEN@github.com/egara/yadm.git
+yadm clone --bootstrap https://jonathanrg:$YADM_TOKEN@github.com/jonathanrg/jonathanHome.git
 
 # Changing URL in order to use imported ssh keys
-yadm remote set-url origin git@github.com:egara/yadm
+yadm remote set-url origin git@github.com:jonathanrg/jonathanHome
 
 # Restoring KDE Plasma settings if it is needed
 if command -v konsave >/dev/null; then
@@ -65,6 +65,6 @@ else
 fi
 
 # Executing ansible playbook for finishing customization
-echo "Executing ansible playbook for finishing customization"
-pushd "$HOME/.ansible"
-ansible-playbook computers/nixos-desktop/playbooks/nixos-desktop-complete-instalation-01.yaml --ask-become-pass
+#echo "Executing ansible playbook for finishing customization"
+#pushd "$HOME/.ansible"
+#ansible-playbook computers/nixos-desktop/playbooks/nixos-desktop-complete-instalation-01.yaml --ask-become-pass
