@@ -8,7 +8,7 @@
 # ------------------------------------------
 
 # Selecting a wallpaper randomly
-WALLPAPER=$(ls /home/egarcia/Insync/eloy.garcia.pca@gmail.com/Google\ Drive/Wallpapers | shuf -n 1)
+WALLPAPER=$(ls /home/jonathanrg/wallpapers/ | shuf -n 1)
 
 # Changing the wallpaper
-swww img /home/egarcia/Insync/eloy.garcia.pca@gmail.com/Google\ Drive/Wallpapers/${WALLPAPER}
+swww img /home/jonathanrg/wallpapers/${WALLPAPER}

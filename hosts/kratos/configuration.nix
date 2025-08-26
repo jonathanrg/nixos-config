@@ -37,7 +37,7 @@
 
   # Special behaviour when laptop lid is closed
   services.logind = {
-    extraConfig = "HandlePowerKey=suspend";
+    #extraConfig = "HandlePowerKey=suspend";
     lidSwitch = "suspend";
   };  
 

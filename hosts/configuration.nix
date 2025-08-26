@@ -117,6 +117,8 @@
     ];
   };
 
+  users.extraGroups.vboxusers.members = [ "jonathanrg" ];  
+
   # Environment variables
   environment.sessionVariables = {
     EDITOR = "nano";
@@ -198,7 +200,6 @@
       eclipses.eclipse-jee
       jdk8
       fish
-      virtualboxWithExtpack
   ];
 
   # List of programs that must be enabled
@@ -240,6 +241,12 @@
     # Allow SPICE USB redirection for USB passthrough in QEMU
     spiceUSBRedirection = {
       enable = true;
+    };
+
+    # VirtualBox
+    virtualbox = {
+      host.enable = true;
+      host.enableExtensionPack = true;
     };
 
     # Docker
