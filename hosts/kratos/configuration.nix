@@ -8,6 +8,13 @@
   # Hostname
   networking.hostName = "kratos";
 
+  # Bridge connection
+  networking.bridges.br0 = {
+    interfaces = [ "enp0s31f6" ]; # Replace "eth0" with your physical interface
+    # Optionally, add more interfaces:
+    # interfaces = [ "eth0" "wlan0" ];
+  };
+
   # Global power management for laptops
   powerManagement.enable = true;
 
