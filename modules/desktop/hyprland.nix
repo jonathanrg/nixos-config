@@ -159,16 +159,15 @@
       # System locking and IDLE
       #########################
       hyprlock
-      swaylock-effects
-      swayidle
+      hypridle
       #########
       # Theming
       #########
       elegant-sddm
       #####################
-      # clipboard
+      # clipboard (Now it is integrated with Walker so it is not needed anymore)
       #####################
-      cliphist
+      #cliphist
       #############
       # Other tools
       #############

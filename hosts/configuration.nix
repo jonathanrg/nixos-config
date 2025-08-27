@@ -117,7 +117,7 @@
     ];
   };
 
-  users.extraGroups.vboxusers.members = [ "jonathanrg" ];  
+  #users.extraGroups.vboxusers.members = [ "jonathanrg" ];  
 
   # Environment variables
   environment.sessionVariables = {
@@ -244,10 +244,10 @@
     };
 
     # VirtualBox
-    virtualbox = {
-      host.enable = true;
-      host.enableExtensionPack = true;
-    };
+    #virtualbox = {
+    #  host.enable = true;
+    #  host.enableExtensionPack = true;
+    #};
 
     # Docker
     docker = {
