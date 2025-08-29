@@ -10,13 +10,13 @@
 
   # Bridge connection
   networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
-  networking.interfaces.br0.useDHCP = true;
-  networking.bridges = {
-    "br0" = {
-      interfaces = [ "enp0s31f6" ];
-    };
-  };
+  networking.bridges."br0".interfaces = [ "enp0s31f6" ];
+  networking.interfaces."br0".ipv4.addresses = [{
+    address = "10.18.8.103";
+    prefixLength = 24;
+  }];
+  networking.defaultGateway = "10.18.8.1";
+  networking.nameservers = [ "193.146.97.133" "193.146.97.132" ];
 
   # Global power management for laptops
   powerManagement.enable = true;
