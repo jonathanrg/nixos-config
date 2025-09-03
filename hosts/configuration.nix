@@ -198,7 +198,7 @@
       buttermanager
       apache-directory-studio
       eclipses.eclipse-jee
-      jdk8
+      pkgs-stable.jdk8
       fish
   ];
 

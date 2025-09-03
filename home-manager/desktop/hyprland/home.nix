@@ -24,6 +24,7 @@ in {
     file.".config/hypr/env.conf".source = ./config-files/env.conf;    
     file.".config/hypr/init.conf".source = ./config-files/init.conf; 
     file.".config/hypr/hyprlock.conf".source = ./config-files/hyprlock.conf;
+    file.".config/hypr/jonathanrg.png".source = ./config-files/jonathanrg.png;
     file.".config/hypr/hypridle.conf".source = ./config-files/hypridle.conf;
     file.".config/hypr/change-wallpaper.sh".source = ./scripts/change-wallpaper.sh;
     file.".config/hypr/nixos-update.sh".source = ./scripts/nixos-update.sh;
@@ -50,6 +51,9 @@ in {
 
     # Walker
     file.".config/walker/config.toml".source = ../../walker/config.toml;
+
+    # Swappy
+    file.".config/swappy/config".source = ../../swappy/config;
   };
   
   # Cursor theming
@@ -125,4 +129,75 @@ in {
     };
   };
 
+  # Kanshi (multi monitoring layout management)
+  services.kanshi = {
+    enable = true;
+    systemdTarget = "hyprland-session.target";
+
+    settings = [
+      {
+        profile = {
+          name = "home";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "1920,0";
+            }
+            {
+              criteria = "HDMI-A-2";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "0,0";
+            }
+          ];
+        };
+      }
+      {
+        profile = {
+          name = "office";
+          outputs = [
+            {
+              criteria = "DP-2";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "1920,0";
+            }
+            {
+              criteria = "DP-1";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "0,0";
+            }
+            {
+              criteria = "eDP-1";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "0,1080";
+            }
+          ];
+        };
+      }
+      {
+        profile = {
+          name = "undocked";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.0;
+              status = "enable";
+              mode = "1920x1080";
+              position = "0,0";
+            }
+          ];
+        };
+      }
+    ];
+  };
 }
