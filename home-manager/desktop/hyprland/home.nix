@@ -24,7 +24,7 @@ in {
     file.".config/hypr/env.conf".source = ./config-files/env.conf;    
     file.".config/hypr/init.conf".source = ./config-files/init.conf; 
     file.".config/hypr/hyprlock.conf".source = ./config-files/hyprlock.conf;
-    file.".config/hypr/jonathanrg.jpg".source = ./config-files/jonathanrg.jpg;
+    file.".config/hypr/jonathanrg.png".source = ./config-files/jonathanrg.png;
     file.".config/hypr/hypridle.conf".source = ./config-files/hypridle.conf;
     file.".config/hypr/change-wallpaper.sh".source = ./scripts/change-wallpaper.sh;
     file.".config/hypr/nixos-update.sh".source = ./scripts/nixos-update.sh;
@@ -54,6 +54,10 @@ in {
 
     # Swappy
     file.".config/swappy/config".source = ../../swappy/config;
+
+    # Swaync
+    file.".config/swaync/config.json".source = ../../swaync/config.json;
+    file.".config/swaync/style.css".source = ../../swaync/style.css;
   };
   
   # Cursor theming
@@ -147,7 +151,7 @@ in {
               position = "1920,0";
             }
             {
-              criteria = "HDMI-A-2";
+              criteria = "DP-2";
               scale = 1.0;
               status = "enable";
               mode = "1920x1080";
