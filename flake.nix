@@ -98,7 +98,7 @@
   # Function that tells my flake which to use and what do what to do with the dependencies.
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, hyprswitch, wallpaperdownloader, hyprland, hyprland-plugins, ... }:
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, walker, ... }:
-  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, ... }:
+  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, stylix, ... }:
     # Variables
     let
       username = "jonathanrg";
@@ -111,7 +111,7 @@
           # to be defined anymore.
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager hyprswitch wallpaperdownloader hyprland hyprland-plugins username location;
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username location autofirma-nix walker;
-          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix;
+          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix stylix;
         }
       );
     };
