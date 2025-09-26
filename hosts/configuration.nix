@@ -201,7 +201,8 @@
       pkgs-stable.jdk8
       fish
       xorg.xkill
-      gnome-terminal
+      kdePackages.konsole
+      keepass
   ];
 
   # List of programs that must be enabled
