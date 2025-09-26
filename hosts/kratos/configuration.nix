@@ -55,7 +55,13 @@
         HandlePowerKey = "suspend";
       };
     };    
-  }; 
+  };
+
+  # Special behaviour when laptop lid is closed
+  # services.logind = {
+  #   extraConfig = "HandlePowerKey=suspend";
+  #   lidSwitch = "suspend";
+  # };
 
   # Important: There is a problem related to the hardware of this
   # machine and the version of the kernel. Due to some incompatibilities

@@ -6,6 +6,7 @@
     # Unstable Nix packages (bleeding edge)
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
+      #url = "github:nixos/nixpkgs?ref=nixos-25.05";
     };
 
     # Stable Nix packages

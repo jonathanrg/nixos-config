@@ -167,7 +167,6 @@
       zip
       kdePackages.partitionmanager
       distrobox
-      #fastfetch
       sublime4
       vlc
       telegram-desktop
@@ -197,9 +196,12 @@
       postman
       buttermanager
       apache-directory-studio
-      eclipses.eclipse-jee
+      pkgs-stable.eclipses.eclipse-jee
+      jdk17
       pkgs-stable.jdk8
       fish
+      xorg.xkill
+      gnome-terminal
   ];
 
   # List of programs that must be enabled
