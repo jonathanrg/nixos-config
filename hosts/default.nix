@@ -55,8 +55,14 @@ let
             host = hostArg;
           };
           home-manager.users.${username} = {
-            imports = [ (import ./home.nix) ]
-              ++ lib.optionals (desktop == "hyprland") [ (import ../home-manager/desktop/hyprland/home.nix) ]
+            imports = [ 
+              stylix.homeModules.stylix
+              (import ./home.nix)
+              (import ../home-manager/desktop/theming/home.nix)
+            ]
+              ++ lib.optionals (desktop == "hyprland") [ 
+                (import ../home-manager/desktop/hyprland/home.nix)
+              ]
               ++ homeManagerExtraImports;
           };
         }

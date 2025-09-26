@@ -12,7 +12,8 @@
   "timeout": 6,
   "timeout-low": 4,
   "timeout-critical": 0,
-  "fit-to-screen": true,
+  "fit-to-screen": false,
+  "control-center-height": 918,
   "control-center-width": 380,
   "notification-window-width": 366,
   "keyboard-shortcuts": true,
@@ -77,7 +78,12 @@
       "subsystem": "leds"
     },*/
     "volume": {
-      "label": ""
+      "label": "",
+              "expand-button-label": "",
+              "collapse-button-label": "",
+              "show-per-app": true,
+              "show-per-app-icon": true,
+              "show-per-app-label":true
     },
     "menubar": {
       "menu#power-buttons": {

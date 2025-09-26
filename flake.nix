@@ -48,6 +48,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Stylix (for styling)
+    stylix = {
+      url = "github:danth/stylix";
+    };
+
     # # Walker
     # walker = {
     #  url = "github:abenz1267/walker";
