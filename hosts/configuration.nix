@@ -126,11 +126,6 @@
     TERMINAL = "kitty";
   };
 
-  # Configuring xdg-utils to use some default applications
-  xdg.mime.defaultApplications = {
-    "x-terminal-emulator" = "kitty.desktop";
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -204,6 +199,7 @@
       kdePackages.konsole
       keepass
       sshpass
+      system-config-printer
   ];
 
   # List of programs that must be enabled

@@ -48,20 +48,20 @@ let
         home-manager.nixosModules.home-manager {
           # Module configuration
           home-manager.backupFileExtension = "backup";
-          home-manager.useGlobalPkgs = true;
+          home-manager.useGlobalPkgs = false;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {
-            inherit username;
+            inherit username pkgs;
             host = hostArg;
           };
           home-manager.users.${username} = {
             imports = [ 
               stylix.homeModules.stylix
               (import ./home.nix)
-              (import ../home-manager/desktop/theming/home.nix)
             ]
               ++ lib.optionals (desktop == "hyprland") [ 
                 (import ../home-manager/desktop/hyprland/home.nix)
+                (import ../home-manager/desktop/hyprland/theming/home.nix)
               ]
               ++ homeManagerExtraImports;
           };
