@@ -203,6 +203,7 @@
       xorg.xkill
       kdePackages.konsole
       keepass
+      sshpass
   ];
 
   # List of programs that must be enabled
