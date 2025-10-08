@@ -191,7 +191,8 @@
       postman
       buttermanager
       apache-directory-studio
-      pkgs-stable.eclipses.eclipse-jee
+      #pkgs-stable.eclipses.eclipse-jee
+      eclipses.eclipse-jee
       jdk17
       pkgs-stable.jdk8
       fish

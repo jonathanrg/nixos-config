@@ -155,7 +155,7 @@
       #dunst
       swaynotificationcenter
       libnotify
-      pamixer # For getting the volume via command line and integrate it with dunst and hyprland
+      #pamixer # For getting the volume via command line and integrate it with dunst and hyprland
       #########################
       # System locking and IDLE
       #########################
