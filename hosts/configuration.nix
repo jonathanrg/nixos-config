@@ -144,7 +144,6 @@
       kdePackages.okular
       nano
       #tailscale
-      libreoffice
       ntfs3g
       fltk
       portaudio
