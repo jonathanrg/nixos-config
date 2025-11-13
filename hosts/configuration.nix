@@ -132,12 +132,15 @@
   # Allow certain packages marked as insecure
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w" # Needed for sublime4
-  ];  
+  ]; 
+
+  programs.gpu-screen-recorder.enable = true; # For promptless recording on both CLI and GUI 
 
   # List of unstable packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
       nvd    # NixOS package version diff tool
+      gpu-screen-recorder-gtk # GUI app
       firefox
       google-chrome
       librewolf
@@ -154,7 +157,8 @@
       wireplumber
       pavucontrol
       python3
-      python311Packages.pip
+      python313Packages.pip
+      python313Packages.tkinter
       p7zip
       unzip
       unrar
@@ -180,7 +184,6 @@
       fd
       wl-clipboard
       nmap
-      element-desktop
       tcpdump
       wireshark
       killall
@@ -301,7 +304,7 @@
     meslo-lgs-nf
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols

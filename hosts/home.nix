@@ -14,13 +14,29 @@
 { config, lib, pkgs, username, ... }:
 
 let
-  # Github repository for yazi plugins https://github.com/yazi-rs/plugins
+  # GitHub repository for yazi plugins https://github.com/yazi-rs/plugins
   yazi-plugins = pkgs.fetchFromGitHub {
     owner = "yazi-rs";
     repo = "plugins";
     rev = "main";
     hash = "sha256-ixZKOtLOwLHLeSoEkk07TB3N57DXoVEyImR3qzGUzxQ=";
   };
+
+  # GitHub repository for tokyo night yazi theme https://github.com/BennyOe/tokyo-night.yazi
+  #yazi-theme-tokyo-night = pkgs.fetchFromGitHub {
+  #    owner = "BennyOe";
+  #    repo = "tokyo-night.yazi";
+  #    rev = "main";
+  #    sha256 = "sha256-4aNPlO5aXP8c7vks6bTlLCuyUQZ4Hx3GWtGlRmbhdto=";
+  #};
+
+  # GitHub repository for catppuccin mocha yazi theme https://github.com/yazi-rs/flavors/catppuccin-mocha.yazi
+  # yazi-theme-catppuccin-mocha = pkgs.fetchFromGitHub {
+  #     owner = "yazi-rs";
+  #     repo = "flavors";
+  #     rev = "main";
+  #     sha256 = "sha256-KNpr7eYHm2dPky1L6EixoD956bsYZZO3bCyKIyAlIEw=";
+  # };
 
 in {
   #imports =
@@ -170,17 +186,70 @@ in {
     enableZshIntegration = true;
     shellWrapperName = "y";
 
+    # Recommended for RAR files
+    package = pkgs.yazi.override {
+      _7zz = pkgs._7zz-rar;  # Support for RAR extraction
+    };
+
+    # Theme (Tokyo Night)
+    #theme = {
+    #  flavor = {
+    #    dark = "tokyo-night";
+    #  };
+    #};
+    #flavors = {
+    #  tokyo-night = "${yazi-theme-catppuccin-mocha}";
+    #};
+
+    # Theme will be managed by stylix
+    # Theme (Catppuccin Mocha)
+    # theme = {
+    #   flavor = {
+    #     dark = "catppuccin-mocha";
+    #   };
+    # };
+    # flavors = {
+    #   catppuccin-mocha = "${yazi-theme-catppuccin-mocha}/catppuccin-mocha.yazi";
+    # };
+
     # yazi.toml
     settings = {
+      # By default, yazi uses its own internal rules for opening files, which
+      # may not align with the system's mime type associations (xdg-open).
+      # The following rule overrides the default behavior and forces yazi to
+      # use xdg-open for all file types, thus respecting the system's default
+      # applications.
+      opener.open = [
+        { run = "xdg-open \"$@\""; orphan = true; for = "unix"; desc = "Open"; }
+      ];
+      # The default player for music will be QMMP
       opener.play = [
         { run = "qmmp \"$@\""; orphan= true; for = "unix"; }
-      ];      
+      ];
+      # The default player for video will be VLC
+      opener.video = [
+        { run = "vlc \"$@\""; orphan = true; for = "unix"; }
+      ];
+      # The default editor will be sublime text
+      opener.edit = [
+        { run = "subl \"$@\""; orphan = true; for = "unix"; }
+      ];
+      # Setting default behaviours for some kind of files
+      open.prepend_rules = [
+        # Video
+        { name = "*.mkv"; use = "video";}
+        { name = "*.mp4"; use = "video";}
+        { name = "*.mov"; use = "video";}
+        { name = "*.wmv"; use = "video";}
+        { name = "*.webm"; use = "video";}
+      ];
     };
 
     plugins = {
       full-border = "${yazi-plugins}/full-border.yazi";
-      toggle-pane = "${yazi-plugins}/toggle-pane.yazi";
+      #toggle-pane = "${yazi-plugins}/toggle-pane.yazi";
       mount = "${yazi-plugins}/mount.yazi";
+      smart-enter = "${yazi-plugins}/smart-enter.yazi";
     };
 
     # Some plugins need to be loaded before hand.
@@ -192,6 +261,21 @@ in {
     # keymap.toml
     keymap = {
       manager.prepend_keymap = [
+        {
+          on = "<C-w>";
+          run = "close";
+          desc = "Close the current tab or quit it it's last";
+        }
+        {
+          on = "<S-e>";
+          run = ''shell 'thunar "$YAZI_CWD"' --orphan'';
+          desc = "Open Thunar in the current directory";
+        }
+        {
+          on = "<S-t>";
+          run = ''shell 'kitty --directory "$YAZI_CWD"' --orphan'';
+          desc = "Open kitty terminal here";
+        }
         {
           on = "T";
           run = "plugin toggle-pane max-preview";
@@ -208,10 +292,20 @@ in {
           desc = "USB";
         }
         {
-          on = "y";
+          on = "<C-c>";
           for  = "unix";
           run = ["shell -- for path in \"$@\"; do echo \"file://$path\"; done | wl-copy -t text/uri-list" "yank"];
           desc = "Copy a file both in system and yazi clipboard";
+        }
+        {
+          on = "<C-x>";
+          run = "yank --cut";
+          desc = "Cut a file";
+        }
+        {
+          on = "<C-v>";
+          run = "paste";
+          desc = "Paste a file";
         }
         {
           on = "!";
@@ -226,8 +320,28 @@ in {
         }
         {
           on = "<C-f>";
-          run = "search";
+          run = "search --via=fd";
           desc = "Search files (fd)";
+        }
+        {
+          on = "<S-f>";
+          run = "search --via=rg";
+          desc = "Search files by content (ripgrep)";
+        }
+        {
+          on = "<Enter>";
+          run = "plugin smart-enter";
+          desc = "Enter the child directory, or open the file";
+        }
+        {
+          on = "<Delete>";
+          run = "trash";
+          desc = "Move to trash";
+        }
+        {
+          on = "<S-Delete>";
+          run = "remove";
+          desc = "Delete permanently";
         }
       ];
     };
@@ -240,20 +354,4 @@ in {
       uris = ["qemu:///system"];
     };
   };
-
-  # Configuring xdg-utils to use some default applications
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "firefox.desktop";
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "application/pdf" = "org.kde.okular.desktop";
-      "application/x-pdf" = "org.kde.okular.desktop";
-      "x-terminal-emulator" = "kitty.desktop";
-      "inode/directory" = "thunar.desktop";
-      "x-scheme-handler/file" = "thunar.desktop";
-    };  
-  };
-
 }
