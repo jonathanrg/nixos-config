@@ -157,8 +157,7 @@
       wireplumber
       pavucontrol
       python3
-      python313Packages.pip
-      python313Packages.tkinter
+      python311Packages.pip
       p7zip
       unzip
       unrar
@@ -194,8 +193,8 @@
       buttermanager
       apache-directory-studio
       #pkgs-stable.eclipses.eclipse-jee
-      eclipses.eclipse-jee
-      jdk17
+      #eclipses.eclipse-jee
+      #jdk17
       pkgs-stable.jdk8
       fish
       xorg.xkill
