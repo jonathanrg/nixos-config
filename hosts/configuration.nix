@@ -199,6 +199,7 @@
       kdePackages.konsole
       keepass
       system-config-printer
+      antigravity
   ];
 
   # List of programs that must be enabled
