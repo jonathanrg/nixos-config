@@ -54,6 +54,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nix Flatpak. Install and manage flatpaks programatically using Nix
+    # https://github.com/gmodena/nix-flatpak
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+    };
+
   };
 
   # The binary cache configuration is strongly recommended to avoid unnecessary local compilation.
@@ -78,7 +84,7 @@
   # Function that tells my flake which to use and what do what to do with the dependencies.
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, hyprswitch, wallpaperdownloader, hyprland, hyprland-plugins, ... }:
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, walker, ... }:
-  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, ... }:
+  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, nix-flatpak, ... }:
     # Variables
     let
       username = "jonathanrg";
@@ -91,7 +97,7 @@
           # to be defined anymore.
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager hyprswitch wallpaperdownloader hyprland hyprland-plugins username location;
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username location autofirma-nix walker;
-          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config;
+          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config nix-flatpak self;
         }
       );
     };

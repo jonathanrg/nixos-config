@@ -491,6 +491,21 @@
         "type": "github"
       }
     },
+    "nix-flatpak_2": {
+      "locked": {
+        "lastModified": 1768119771,
+        "narHash": "sha256-kbbmAfCXcgjdShTDDEn/pCoC5rKQMTd1BksXANn8D2A=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "2e49028cb29c76c8553c6099b19f11879db2cbd1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
     "nix-github-actions": {
       "inputs": {
         "nixpkgs": [
@@ -784,6 +799,7 @@
         "autofirma-nix": "autofirma-nix",
         "disko": "disko",
         "home-manager": "home-manager_2",
+        "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "sicos-config": "sicos-config",
@@ -796,7 +812,7 @@
         "disko": "disko_2",
         "elephant": "elephant",
         "home-manager": "home-manager_4",
-        "nix-flatpak": "nix-flatpak",
+        "nix-flatpak": "nix-flatpak_2",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": [
           "nixpkgs"

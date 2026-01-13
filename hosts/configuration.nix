@@ -134,6 +134,15 @@
     "openssl-1.1.1w" # Needed for sublime4
   ]; 
 
+  # Enabling flatpaks and installing some of them
+  # via nix-flatpak module
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "com.stremio.Stremio"
+    ];
+  };
+
   programs.gpu-screen-recorder.enable = true; # For promptless recording on both CLI and GUI 
 
   # List of unstable packages installed in system profile. To search, run:
@@ -227,9 +236,6 @@
       enable = true;
     };
   };
-
-  # Enabling Flatpak
-  services.flatpak.enable = true;
 
   # Preventing xterm emulator to be installed
   services.xserver.excludePackages = [ pkgs.xterm ];

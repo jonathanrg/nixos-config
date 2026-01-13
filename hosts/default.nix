@@ -1,4 +1,5 @@
-{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, ... }:
+#Variables
+{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, nix-flatpak, self,... }:
 let
   # System architecture
   system = "x86_64-linux";
@@ -33,6 +34,9 @@ let
       };
 
       modules = extraModules ++ [
+        
+        # Nix-flatpak module
+        nix-flatpak.nixosModules.nix-flatpak
         
         # Common configuration for all hosts
         ./configuration.nix
