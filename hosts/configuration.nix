@@ -143,7 +143,6 @@
       gpu-screen-recorder-gtk # GUI app
       firefox
       google-chrome
-      librewolf
       kdePackages.okular
       nano
       #tailscale
@@ -197,10 +196,8 @@
       #jdk17
       pkgs-stable.jdk8
       fish
-      xorg.xkill
       kdePackages.konsole
       keepass
-      sshpass
       system-config-printer
   ];
 

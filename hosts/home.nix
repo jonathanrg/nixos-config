@@ -31,12 +31,13 @@ let
   #};
 
   # GitHub repository for catppuccin mocha yazi theme https://github.com/yazi-rs/flavors/catppuccin-mocha.yazi
-  # yazi-theme-catppuccin-mocha = pkgs.fetchFromGitHub {
-  #     owner = "yazi-rs";
-  #     repo = "flavors";
-  #     rev = "main";
-  #     sha256 = "sha256-KNpr7eYHm2dPky1L6EixoD956bsYZZO3bCyKIyAlIEw=";
-  # };
+  yazi-theme-catppuccin-mocha = pkgs.fetchFromGitHub {
+      owner = "yazi-rs";
+      repo = "flavors";
+      #rev = "main";
+      rev = "4a1802a5add0f867b08d5890780c10dd1f051c36";
+      sha256 = "sha256-RrF97Lg9v0LV+XseJw4RrdbXlv+LJzfooOgqHD+LGcw=";
+  };
 
 in {
   #imports =
@@ -59,121 +60,7 @@ in {
       cheat
       gcc
       gnumake
-
-      # Video/Audio
-      #feh               # Image Viewer
-      #mpv               # Media Player
-      #pavucontrol       # Audio Control
-      #plex-media-player # Media Player
-      #vlc               # Media Player
-      #stremio           # Media Streamer
-
-      # Apps
-      #appimage-run      # Runs AppImages on NixOS
-      #firefox           # Browser
-      #google-chrome     # Browser
-      #remmina           # XRDP & VNC Client
-
-      # File Management
-      #gnome.file-roller # Archive Manager
-      #okular            # PDF Viewer
-      #pcmanfm           # File Manager
-      #rsync             # Syncer - $ rsync -r dir1/ dir2/
-
-      # General configuration
-      #killall          # Stop Applications
-      #pciutils         # Computer Utility Info
-      #usbutils         # USB Utility Info
-      #wacomtablet      # Wacom Tablet
-      #zsh              # Shell
-      #
-      # General home-manager
-      #alacritty        # Terminal Emulator
-      #dunst            # Notifications
-      #doom emacs       # Text Editor
-      #libnotify        # Dependency for Dunst
-      #neovim           # Text Editor
-      #rofi             # Menu
-      #rofi-power-menu  # Power Menu
-      #udiskie          # Auto Mounting
-      #vim              # Text Editor
-      #
-      # Xorg configuration
-      #xclip            # Console Clipboard
-      #xorg.xev         # Input Viewer
-      #xorg.xkill       # Kill Applications
-      #xorg.xrandr      # Screen Settings
-      #xterm            # Terminal
-      #
-      # Xorg home-manager
-      #flameshot        # Screenshot
-      #picom            # Compositer
-      #sxhkd            # Shortcuts
-      #
-      # Wayland configuration
-      #autotiling       # Tiling Script
-      #grim             # Image Grabber
-      #slurp            # Region Selector
-      #swappy           # Screenshot Editor
-      #swayidle         # Idle Management Daemon
-      #wev              # Input Viewer
-      #wl-clipboard     # Console Clipboard
-      #wlr-randr        # Screen Settings
-      #xwayland         # X for Wayland
-      #
-      # Wayland home-manager
-      #mpvpaper         # Video Wallpaper
-      #pamixer          # Pulse Audio Mixer
-      #swaybg           # Background
-      #swaylock-fancy   # Screen Locker
-      #waybar           # Bar
-      #
-      # Desktop
-      #ansible          # Automation
-      #blueman          # Bluetooth
-      #deluge           # Torrents
-      #discord          # Chat
-      #ffmpeg           # Video Support (dslr)
-      #gmtp             # Mount MTP (GoPro)
-      #gphoto2          # Digital Photography
-      #handbrake        # Encoder
-      #heroic           # Game Launcher
-      #hugo             # Static Website Builder
-      #lutris           # Game Launcher
-      #mkvtoolnix       # Matroska Tool
-      #plex-media-player# Media Player
-      #prismlauncher    # MC Launcher
-      #steam            # Games
-      #simple-scan      # Scanning
-      #sshpass          # Ansible dependency
-      # 
-      # Laptop
-      #cbatticon        # Battery Notifications
-      #blueman          # Bluetooth
-      #light            # Display Brightness
-      #libreoffice      # Office Tools
-      #simple-scan      # Scanning
-      #
-      # Flatpak
-      #obs-studio       # Recording/Live Streaming
     ];
-
-    # QMMP winamp skin
-    # If QMMP doesn't switch to Winamp skin automatically, go to Edit -> Settings -> Plugins and check
-    # Skinned User Interface within User Interfaces section. Then, restart QMMP
-    file.".config/qmmp/skins/winamp_classic.wsz".source = ../home-manager/qmmp/skins/winamp_classic.wsz;    
-
-    #file.".config/wall".source = ../modules/themes/wall;
-    #file.".config/wall.mp4".source = ../modules/themes/wall.mp4;
-    #pointerCursor = {                         # This will set cursor system-wide so applications can not choose their own
-    #  gtk.enable = true;
-    #  name = "Dracula-cursors";
-    #  #name = "Catppuccin-Mocha-Dark-Cursors";
-    #  package = pkgs.dracula-theme;
-    #  #package = pkgs.catppuccin-cursors.mochaDark;
-    #  size = 16;
-    #};
-    #stateVersion = "22.05";
   };
 
   programs = {
@@ -201,52 +88,85 @@ in {
     #  tokyo-night = "${yazi-theme-catppuccin-mocha}";
     #};
 
-    # Theme will be managed by stylix
+    # Theme was managed by stylix but stopped working
+    # Enabling theming via home manager again
     # Theme (Catppuccin Mocha)
-    # theme = {
-    #   flavor = {
-    #     dark = "catppuccin-mocha";
-    #   };
-    # };
-    # flavors = {
-    #   catppuccin-mocha = "${yazi-theme-catppuccin-mocha}/catppuccin-mocha.yazi";
-    # };
+    theme = {
+      flavor = {
+        dark = "catppuccin-mocha";
+      };
+    };
+    flavors = {
+      catppuccin-mocha = "${yazi-theme-catppuccin-mocha}/catppuccin-mocha.yazi";
+    };
 
     # yazi.toml
     settings = {
-      # By default, yazi uses its own internal rules for opening files, which
-      # may not align with the system's mime type associations (xdg-open).
-      # The following rule overrides the default behavior and forces yazi to
-      # use xdg-open for all file types, thus respecting the system's default
-      # applications.
-      opener.open = [
-        { run = "xdg-open \"$@\""; orphan = true; for = "unix"; desc = "Open"; }
-      ];
-      # The default player for music will be QMMP
-      opener.play = [
-        { run = "qmmp \"$@\""; orphan= true; for = "unix"; }
-      ];
-      # The default player for video will be VLC
-      opener.video = [
-        { run = "vlc \"$@\""; orphan = true; for = "unix"; }
-      ];
-      # The default editor will be sublime text
-      opener.edit = [
-        { run = "subl \"$@\""; orphan = true; for = "unix"; }
-      ];
-      # Setting default behaviours for some kind of files
-      open.prepend_rules = [
-        # Video
-        { name = "*.mkv"; use = "video";}
-        { name = "*.mp4"; use = "video";}
-        { name = "*.mov"; use = "video";}
-        { name = "*.wmv"; use = "video";}
-        { name = "*.webm"; use = "video";}
-      ];
+      opener = {
+        # By default, yazi uses its own internal rules for opening files, which
+        # may not align with the system's mime type associations (xdg-open).
+        # The following rule overrides the default behavior and forces yazi to
+        # use xdg-open for all file types, thus respecting the system's default
+        # applications.
+        open = [
+          { run = "xdg-open \"$@\""; orphan = true; for = "unix"; desc = "Open"; }
+        ];
+
+        # The default player for music will be QMMP
+        play = [
+          { run = "qmmp \"$@\""; orphan= true; for = "unix"; }
+        ];
+
+        # The default player for video will be VLC
+        video = [
+          { run = "vlc \"$@\""; orphan = true; for = "unix"; }
+        ];
+
+        # The default image viewer will be feh
+        image = [
+          { run = "feh \"$@\""; orphan= true; for = "unix"; }
+        ];
+
+        # The default PDF reader will be Okular
+        pdf = [
+          { run = "okular \"$@\""; orphan = true; for = "unix"; }
+        ];
+
+        # The default editor will be sublime text
+        edit = [
+          { run = "subl \"$@\""; orphan = true; for = "unix"; }
+        ];
+
+        # A generic opener for Firefox
+        firefox = [
+          { run = "firefox \"$@\""; orphan = true; for = "unix"; }
+        ];
+      };
+
+      open = {
+        # Setting default applications for some kind of files
+        rules = [
+          { mime = "text/*"; use = "edit"; }
+          { mime = "video/*"; use = "video"; }
+          { mime = "application/json"; use = "edit"; }
+          { mime = "application/pdf"; use = ["pdf" "firefox"]; }
+          { mime = "audio/aac"; use = "play"; }
+          { mime = "audio/midi"; use = "play"; }
+          { mime = "audio/x-midi"; use = "play"; }
+          { mime = "audio/mpeg"; use = "play"; }
+          { mime = "audio/ogg"; use = "play"; }
+          { mime = "audio/wav"; use = "play"; }
+          { mime = "audio/webm"; use = "play"; }
+          { mime = "audio/3gpp"; use = "play"; }
+          { mime = "image/jpeg"; use = "image"; }
+          { mime = "image/png"; use = "image"; }
+          { mime = "*"; use = "open"; } # Fallback to xdg-open for all other mimetypes
+        ];  
+      }; 
     };
 
     plugins = {
-      full-border = "${yazi-plugins}/full-border.yazi";
+      #full-border = "${yazi-plugins}/full-border.yazi";
       #toggle-pane = "${yazi-plugins}/toggle-pane.yazi";
       mount = "${yazi-plugins}/mount.yazi";
       smart-enter = "${yazi-plugins}/smart-enter.yazi";
@@ -254,13 +174,13 @@ in {
 
     # Some plugins need to be loaded before hand.
     # Example: full-border https://github.com/yazi-rs/plugins/tree/main/full-border.yazi
-    initLua = ''
-      require("full-border"):setup()
-    '';
+    #initLua = ''
+    #  require("full-border"):setup()
+    #'';
 
     # keymap.toml
     keymap = {
-      manager.prepend_keymap = [
+      mgr.prepend_keymap = [
         {
           on = "<C-w>";
           run = "close";

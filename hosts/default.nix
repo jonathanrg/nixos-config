@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, stylix, walker, ... }:
+{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, ... }:
 let
   # System architecture
   system = "x86_64-linux";
@@ -33,20 +33,41 @@ let
       };
 
       modules = extraModules ++ [
-
-        # Walker module
-        walker.nixosModules.default
         
         # Common configuration for all hosts
         ./configuration.nix
 
-        # Desktop Environment modules
-        # It is a module itself!
-        ({ config, lib, host, ... }: {
-          imports =
-            lib.optionals (host.desktop == "hyprland") [ ../modules/desktop/hyprland.nix ] ++
-            lib.optionals (host.desktop == "plasma") [ ../modules/desktop/plasma.nix ];
-        })
+        # Import sicos module and activate options
+        sicos-config.nixosModules.sicos-hyprland
+        {
+          programs.sicos.hyprland = {
+            enable = true;
+            theming.enable = true;
+            powerManagement.enable = true;
+            insync.enable = true;
+            insync.package = pkgs-stable.insync;
+            kanshi.enable = true;
+
+            # Custom config files
+
+            # Hyprland
+            hyprland.configFile = builtins.path { path = ../home-manager/desktop/hyprland/config/hyprland.conf; };
+
+            # Hyprlock
+            hyprlock.profilePicture = builtins.path { path = ../home-manager/desktop/hyprland/config/user.jpg; };
+
+            # Kanshi
+            kanshi.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/kanshi/config; };
+
+            # Waybar
+            waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
+            waybar.styleFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
+
+            # Scripts
+            scripts.path = builtins.path { path = ../home-manager/desktop/hyprland/scripts; };  
+
+          };
+        }
 
         # Home Manager module
         home-manager.nixosModules.home-manager {
@@ -59,15 +80,11 @@ let
             host = hostArg;
           };
           home-manager.users.${username} = {
+            # Import sicos home manager module
             imports = [ 
-              stylix.homeModules.stylix
+              sicos-config.homeManagerModules.sicos-hyprland
               (import ./home.nix)
-            ]
-              ++ lib.optionals (desktop == "hyprland") [ 
-                (import ../home-manager/desktop/hyprland/home.nix)
-                (import ../home-manager/desktop/hyprland/theming/home.nix)
-              ]
-              ++ homeManagerExtraImports;
+            ];
           };
         }
       ];
@@ -85,56 +102,6 @@ let
   ];
   vmHomeManagerExtraImports = [ (import ./vm/home.nix) ];
 
-  # Modules for Rocket
-  rocketModules = [
-    disko.nixosModules.disko {
-      _module.args.disks = [ "/dev/sda" ];
-      imports = [(import ./rocket/disko-config.nix)];
-    }
-    ./rocket/hardware-configuration.nix
-    ./bios-configuration.nix
-    ./rocket/configuration.nix
-  ];
-
-  # Modules for Ironman
-  ironmanModules = [
-    disko.nixosModules.disko {
-      _module.args.disks = [ "/dev/sda" ];
-      imports = [(import ./ironman/disko-config.nix)];
-    }
-    ./ironman/hardware-configuration.nix
-    ./efi-configuration.nix
-    ./ironman/configuration.nix
-    autofirma-nix.nixosModules.default
-    # It is a module itself!
-    ({ config, pkgs, ... }: {
-      # The autofirma command becomes available system-wide
-      programs.autofirma = {
-        enable = true;
-        firefoxIntegration.enable = true;
-      };
-      # # DNIeRemote integration for using phone as NFC reader
-      # programs.dnieremote = {
-      #   enable = true;
-      # };
-      # The FNMT certificate configurator
-      programs.configuradorfnmt = {
-        enable = true;
-        firefoxIntegration.enable = true;
-      };
-      # Firefox configured to work with AutoFirma
-      programs.firefox = {
-        enable = true;
-        policies.SecurityDevices = {
-          "OpenSC PKCS#11" = "${pkgs.opensc}/lib/opensc-pkcs11.so";
-          "DNIeRemote" = "${config.programs.dnieremote.finalPackage}/lib/libdnieremotepkcs11.so";
-        };
-      };
-      # Enable PC/SC smart card service
-      services.pcscd.enable = true;
-    })
-  ];
-  
   # Modules for Kratos
   kratosModules = [
     disko.nixosModules.disko {
@@ -181,30 +148,6 @@ in
     desktop = "plasma";
     extraModules = vmModules;
     homeManagerExtraImports = vmHomeManagerExtraImports;
-  };
-
-  # Rocket profiles
-  "rocket-plasma" = mkHost {
-    hostName = "rocket";
-    desktop = "plasma";
-    extraModules = rocketModules;
-  };
-  "rocket-hyprland" = mkHost {
-    hostName = "rocket";
-    desktop = "hyprland";
-    extraModules = rocketModules;
-  };
-
-  # Ironman profiles
-  "ironman-plasma" = mkHost {
-    hostName = "ironman";
-    desktop = "plasma";
-    extraModules = ironmanModules;
-  };
-  "ironman-hyprland" = mkHost {
-    hostName = "ironman";
-    desktop = "hyprland";
-    extraModules = ironmanModules;
   };
 
   # Kratos profiles

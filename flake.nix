@@ -11,7 +11,7 @@
 
     # Stable Nix packages
     nixpkgs-stable = {
-      url = "github:nixos/nixpkgs?ref=nixos-25.05";
+      url = "github:nixos/nixpkgs?ref=nixos-25.11";
     };
     
     # Disko packages (for automatic partitioning)
@@ -45,43 +45,14 @@
     autofirma-nix = {
       url = "github:nix-community/autofirma-nix";  # For nixpkgs-unstable
       # url = "github:nix-community/autofirma-nix/release-24.11";  # For NixOS 24.11
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    # 3. Tu módulo sicos desde GitHub
+    sicos-config = {
+      url = "github:egara/nixos-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Walker and Elephant
-    elephant = {
-      url = "github:abenz1267/elephant";
-    };
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
-
-    # Stylix (for styling)
-    stylix = {
-      url = "github:danth/stylix";
-    };
-
-    # # Walker
-    # walker = {
-    #  url = "github:abenz1267/walker";
-    # };
-
-    # # Hyprland
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland";
-    # };
-
-    # # Hyprland plugins
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-
-#    # Stylix (for styling)
-#    stylix = {
-#      url = "github:danth/stylix";
-#    };
 
   };
 
@@ -107,7 +78,7 @@
   # Function that tells my flake which to use and what do what to do with the dependencies.
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, hyprswitch, wallpaperdownloader, hyprland, hyprland-plugins, ... }:
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, walker, ... }:
-  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, stylix, walker, ... }:
+  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, ... }:
     # Variables
     let
       username = "jonathanrg";
@@ -120,7 +91,7 @@
           # to be defined anymore.
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager hyprswitch wallpaperdownloader hyprland hyprland-plugins username location;
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username location autofirma-nix walker;
-          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix stylix walker;
+          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config;
         }
       );
     };
