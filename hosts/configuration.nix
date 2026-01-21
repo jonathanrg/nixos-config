@@ -201,8 +201,7 @@
       buttermanager
       apache-directory-studio
       #pkgs-stable.eclipses.eclipse-jee
-      #eclipses.eclipse-jee
-      #jdk17
+      eclipses.eclipse-jee
       pkgs-stable.jdk8
       fish
       kdePackages.konsole
