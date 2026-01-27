@@ -66,11 +66,11 @@ let
             kanshi.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/kanshi/config; };
 
             # Waybar
-              programs.sicos.hyprland.waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
-              programs.sicos.hyprland.waybar.styleFile = 
-                if themeMode == "light"
-                then builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style-light.css; }
-                else builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
+            waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
+            waybar.styleFile = 
+              if themeMode == "light"
+              then builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style-light.css; }
+              else builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
 
             # Scripts
             scripts.path = builtins.path { path = ../home-manager/desktop/hyprland/scripts; };  
