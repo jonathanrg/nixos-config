@@ -23,6 +23,7 @@ let
 
     let
       hostArg = { inherit hostName desktop; };
+      themeMode = "light";
     in
     lib.nixosSystem {
 
@@ -47,6 +48,7 @@ let
           programs.sicos.hyprland = {
             enable = true;
             theming.enable = true;
+            theming.mode = themeMode;
             powerManagement.enable = true;
             insync.enable = true;
             insync.package = pkgs-stable.insync;
@@ -64,8 +66,11 @@ let
             kanshi.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/kanshi/config; };
 
             # Waybar
-            waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
-            waybar.styleFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
+              programs.sicos.hyprland.waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
+              programs.sicos.hyprland.waybar.styleFile = 
+                if themeMode == "light"
+                then builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style-light.css; }
+                else builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
 
             # Scripts
             scripts.path = builtins.path { path = ../home-manager/desktop/hyprland/scripts; };  
