@@ -132,9 +132,9 @@ in {
           { run = "okular \"$@\""; orphan = true; for = "unix"; }
         ];
 
-        # The default editor will be sublime text
+        # The default editor will be Zed
         edit = [
-          { run = "subl \"$@\""; orphan = true; for = "unix"; }
+          { run = "zeditor \"$@\""; orphan = true; for = "unix"; }
         ];
 
         # A generic opener for Firefox
@@ -274,4 +274,45 @@ in {
       uris = ["qemu:///system"];
     };
   };
+
+  programs.zed-editor = {
+    enable = true;
+    # For more extensions, go to https://github.com/DuskSystems/nix-zed-extensions/tree/main/generated/extensions
+    extensions = [
+      "nix"
+      "toml"
+      "yaml"
+      "java"
+      "html"
+      "javascript-snippets"
+      "css-modules-kit"
+      "css-variables"
+      "csv"
+      "markdown-oxide"
+      "markdownlint"
+      "python-requirements"
+      "basher"
+      "docker-compose"
+      "dockerfile"
+
+    ];
+    userSettings = {
+      hour_format = "hour24";
+      vim_mode = false;
+      restore_on_startup = "last_workspace";
+      session = {
+        trust_all_worktrees = true;
+      };
+    };
+
+    # userKeymaps = [
+    #   {
+    #     context = "Workspace";
+    #     bindings = {
+    #       "ctrl-alt-t" = "terminal_panel::ToggleFocus";
+    #     };
+    #   }
+    # ];
+  };
+
 }

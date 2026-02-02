@@ -23,7 +23,7 @@ let
 
     let
       hostArg = { inherit hostName desktop; };
-      themeMode = "light";
+      themeMode = "dark";
     in
     lib.nixosSystem {
 

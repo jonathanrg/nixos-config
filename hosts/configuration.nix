@@ -129,11 +129,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Allow certain packages marked as insecure
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w" # Needed for sublime4
-  ]; 
-
   # Enabling flatpaks and installing some of them
   # via nix-flatpak module
   services.flatpak = {
@@ -154,7 +149,6 @@
       google-chrome
       kdePackages.okular
       nano
-      #tailscale
       ntfs3g
       fltk
       portaudio
@@ -172,7 +166,6 @@
       zip
       kdePackages.partitionmanager
       distrobox
-      sublime4
       vlc
       telegram-desktop
       pkgs-stable.insync
