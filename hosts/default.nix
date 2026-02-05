@@ -35,10 +35,10 @@ let
       };
 
       modules = extraModules ++ [
-        
+
         # Nix-flatpak module
         nix-flatpak.nixosModules.nix-flatpak
-        
+
         # Common configuration for all hosts
         ./configuration.nix
 
@@ -66,14 +66,14 @@ let
             kanshi.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/kanshi/config; };
 
             # Waybar
-            waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
-            waybar.styleFile = 
-              if themeMode == "light"
-              then builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style-light.css; }
-              else builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
+            #waybar.configFile = builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/config.jsonc; };
+            # waybar.styleFile =
+            #   if themeMode == "light"
+            #   then builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style-light.css; }
+            #   else builtins.path { path = ../home-manager/desktop/hyprland/programs/waybar/style.css; };
 
             # Scripts
-            scripts.path = builtins.path { path = ../home-manager/desktop/hyprland/scripts; };  
+            scripts.path = builtins.path { path = ../home-manager/desktop/hyprland/scripts; };
 
           };
         }
@@ -90,7 +90,7 @@ let
           };
           home-manager.users.${username} = {
             # Import sicos home manager module
-            imports = [ 
+            imports = [
               sicos-config.homeManagerModules.sicos-hyprland
               (import ./home.nix)
             ];
