@@ -24,6 +24,7 @@ let
     let
       hostArg = { inherit hostName desktop; };
       themeMode = "dark";
+      themeScheme = "catppuccin-mocha";
     in
     lib.nixosSystem {
 
@@ -49,6 +50,7 @@ let
             enable = true;
             theming.enable = true;
             theming.mode = themeMode;
+            theming.base16Scheme = themeScheme;
             powerManagement.enable = true;
             insync.enable = true;
             insync.package = pkgs-stable.insync;
