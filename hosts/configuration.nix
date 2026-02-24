@@ -101,23 +101,23 @@
     password = "administrador";
     isNormalUser = true;
     description = "Jonathan";
-    extraGroups = [ 
-      "wheel" 
-      "video" 
-      "audio" 
-      "networkmanager" 
-      "docker" 
-      "input" 
-      "libvirtd" 
-      "bluetooth" 
-      "kvm" 
+    extraGroups = [
+      "wheel"
+      "video"
+      "audio"
+      "networkmanager"
+      "docker"
+      "input"
+      "libvirtd"
+      "bluetooth"
+      "kvm"
     ];
     packages = with pkgs; [
       #firefox
     ];
   };
 
-  #users.extraGroups.vboxusers.members = [ "jonathanrg" ];  
+  #users.extraGroups.vboxusers.members = [ "jonathanrg" ];
 
   # Environment variables
   environment.sessionVariables = {
@@ -138,7 +138,7 @@
     ];
   };
 
-  programs.gpu-screen-recorder.enable = true; # For promptless recording on both CLI and GUI 
+  programs.gpu-screen-recorder.enable = true; # For promptless recording on both CLI and GUI
 
   # List of unstable packages installed in system profile. To search, run:
   # $ nix search wget
@@ -158,8 +158,8 @@
       flac
       wireplumber
       pavucontrol
-      python3
-      python311Packages.pip
+      pkgs-stable.python3
+      pkgs-stable.python3Packages.pip
       p7zip
       unzip
       unrar

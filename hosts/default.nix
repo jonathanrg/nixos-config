@@ -24,7 +24,7 @@ let
     let
       hostArg = { inherit hostName desktop; };
       themeMode = "dark";
-      themeScheme = "catppuccin-mocha";
+      themeScheme = "tokyo-city-dark";
     in
     lib.nixosSystem {
 
@@ -55,6 +55,8 @@ let
             insync.enable = true;
             insync.package = pkgs-stable.insync;
             kanshi.enable = true;
+            waybar.overwrite = false;
+            swaync.overwrite = false;
 
             # Custom config files
 
