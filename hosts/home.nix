@@ -14,6 +14,7 @@
 { config, lib, pkgs, username, ... }:
 
 let
+
   # GitHub repository for yazi plugins https://github.com/yazi-rs/plugins
   yazi-plugins = pkgs.fetchFromGitHub {
     owner = "yazi-rs";
@@ -161,8 +162,8 @@ in {
           { mime = "image/jpeg"; use = "image"; }
           { mime = "image/png"; use = "image"; }
           { mime = "*"; use = "open"; } # Fallback to xdg-open for all other mimetypes
-        ];  
-      }; 
+        ];
+      };
     };
 
     plugins = {
