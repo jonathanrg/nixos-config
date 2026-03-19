@@ -31,7 +31,7 @@
         # When power button is pushed
         HandlePowerKey = "suspend";
       };
-    };    
+    };
   };
 
   # Special behaviour when laptop lid is closed
@@ -53,9 +53,9 @@
   boot.kernelPackages = pkgs-stable.linuxPackages_zen;
 
   # Kernel parameters passed in GRUB in order to
-  # allow the laptop starts normally due to the 
+  # allow the laptop starts normally due to the
   # hardware of this machine
-   boot.kernelParams = [ 
+   boot.kernelParams = [
    ];
 
   # The current docker version is now working fine with Nvidia drivers
@@ -72,8 +72,11 @@
   ];
 
   # Creating a symlink for openjdk8 in order to configure Eclipse properly
-  systemd.tmpfiles.rules = [
-    "L /var/lib/jvm/openjdk8 - - - - ${pkgs-stable.jdk8}/lib/openjdk"
-  ];
+  system.activationScripts.jdk8-link = {
+    text = ''
+      mkdir -p /var/lib/jvm
+      ln -sfn ${pkgs-stable.jdk8}/lib/openjdk /var/lib/jvm/openjdk8
+    '';
+  };
 
 }
