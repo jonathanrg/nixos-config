@@ -196,6 +196,7 @@
       #pkgs-stable.eclipses.eclipse-jee
       eclipses.eclipse-jee
       pkgs-stable.jdk8
+      jdk21
       fish
       kdePackages.konsole
       keepass

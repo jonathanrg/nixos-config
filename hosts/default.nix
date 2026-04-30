@@ -24,7 +24,7 @@ let
     let
       hostArg = { inherit hostName desktop; };
       themeMode = "dark";
-      themeScheme = "ayu-dark";
+      themeScheme = "tokyo-city-dark";
     in
     lib.nixosSystem {
 
