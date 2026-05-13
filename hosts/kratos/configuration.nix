@@ -49,8 +49,8 @@
   # it is necessary to let the laptop booting normally, select
   # a kernel lower than 6.4
   #boot.kernelPackages = pkgs.linuxPackages_6_1;
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs-stable.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs-stable.linuxPackages_zen;
 
   # Kernel parameters passed in GRUB in order to
   # allow the laptop starts normally due to the

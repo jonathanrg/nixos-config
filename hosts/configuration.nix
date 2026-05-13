@@ -169,7 +169,10 @@
       vlc
       telegram-desktop
       pkgs-stable.insync
+      mesa-demos
+      gpu-viewer
       pciutils
+      nvtopPackages.nvidia
       bind
       encfs
       #pkgs-stable.quickemu
@@ -185,7 +188,8 @@
       wl-clipboard
       nmap
       tcpdump
-      wireshark
+      #wireshark
+      maven
       killall
       gemini-cli
       gradia
@@ -195,8 +199,8 @@
       apache-directory-studio
       #pkgs-stable.eclipses.eclipse-jee
       eclipses.eclipse-jee
-      pkgs-stable.jdk8
       jdk21
+      pkgs-stable.jdk8
       fish
       kdePackages.konsole
       keepass
@@ -206,6 +210,11 @@
 
   # List of programs that must be enabled
   programs = {
+    # Java
+    java = {
+      enable = true;
+      package = pkgs.jdk21;
+    };
     # AppImage
     appimage = {
       enable = true;
@@ -232,6 +241,34 @@
 
   # Preventing xterm emulator to be installed
   services.xserver.excludePackages = [ pkgs.xterm ];
+
+  # NVIDIA drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+
+      # Modesetting is required.
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+
+  };
+
+  hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+    # integrated
+    intelBusId = "PCI:0:2:0";
+    # dedicated
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   # Virtualisation
   virtualisation = {
@@ -275,7 +312,7 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+    # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
   # Enabling experimental Nix flakes and disabling 'Git tree ... is dirty' message
