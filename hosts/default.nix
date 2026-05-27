@@ -61,7 +61,7 @@ let
             # Custom config files
 
             # Hyprland
-            hyprland.configFile = builtins.path { path = ../home-manager/desktop/hyprland/config/hyprland.conf; };
+            hyprland.configFile = builtins.path { path = ../home-manager/desktop/hyprland/config/hyprland.lua; };
 
             # Hyprlock
             hyprlock.profilePicture = builtins.path { path = ../home-manager/desktop/hyprland/config/user.jpg; };

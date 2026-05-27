@@ -199,13 +199,14 @@
       apache-directory-studio
       #pkgs-stable.eclipses.eclipse-jee
       eclipses.eclipse-jee
-      jdk21
+      jdk25
       pkgs-stable.jdk8
       fish
       kdePackages.konsole
       keepass
       system-config-printer
       antigravity
+      claude-code
   ];
 
   # List of programs that must be enabled
