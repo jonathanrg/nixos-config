@@ -380,10 +380,10 @@ hl.window_rule({
 })
 
 -- Focus on activate any window
-hl.window_rule({
-    match = { class = ".*" },
-    focus_on_activate = true,
-})
+-- hl.window_rule({
+--     match = { class = ".*" },
+--     focus_on_activate = true,
+-- })
 
 hl.window_rule({
     match = { class = "^(kitty|thunar)$" },

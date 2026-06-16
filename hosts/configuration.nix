@@ -174,7 +174,7 @@
       pciutils
       nvtopPackages.nvidia
       bind
-      encfs
+      #encfs
       #pkgs-stable.quickemu
       #pkgs-stable.quickgui
       quickemu
@@ -191,7 +191,6 @@
       #wireshark
       maven
       killall
-      gemini-cli
       gradia
       bluez-tools
       postman
@@ -205,8 +204,11 @@
       kdePackages.konsole
       keepass
       system-config-printer
-      antigravity
       claude-code
+      libreoffice
+      inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-ide
+      inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-cli
+      opencode
   ];
 
   # List of programs that must be enabled

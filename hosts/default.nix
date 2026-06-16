@@ -1,5 +1,5 @@
 #Variables
-{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, nix-flatpak, self,... }:
+{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, nix-flatpak, antigravity-nix, self,... }:
 let
   # System architecture
   system = "x86_64-linux";

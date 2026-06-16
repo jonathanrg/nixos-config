@@ -14,6 +14,12 @@
       url = "github:nixos/nixpkgs?ref=nixos-25.11";
     };
 
+    # Antigravity repo
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Disko packages (for automatic partitioning)
     disko = {
       url = "github:nix-community/disko";
@@ -44,7 +50,7 @@
     # For more information https://nix-community.github.io/autofirma-nix
     autofirma-nix = {
       #url = "github:nix-community/autofirma-nix";  # For nixpkgs-unstable
-      url = "github:nix-community/autofirma-nix/release-25.11";  # For NixOS 24.11
+      url = "github:nix-community/autofirma-nix/release-26.05";
       #url = "git+https://github.com/nix-community/autofirma-nix.git?rev=75770f68709e764659712ff152193d7986db2530";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
@@ -83,7 +89,7 @@
   # Function that tells my flake which to use and what do what to do with the dependencies.
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, hyprswitch, wallpaperdownloader, hyprland, hyprland-plugins, ... }:
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, ... }:
-  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, nix-flatpak, ... }:
+  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, nix-flatpak, antigravity-nix, ... }:
     # Variables
     let
       username = "jonathanrg";
@@ -96,7 +102,7 @@
           # to be defined anymore.
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager hyprswitch wallpaperdownloader hyprland hyprland-plugins username location;
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username location autofirma-nix;
-          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config nix-flatpak self;
+          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config nix-flatpak antigravity-nix self;
         }
       );
     };
