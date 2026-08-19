@@ -1,5 +1,5 @@
 #Variables
-{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, nix-flatpak, antigravity-nix, self,... }:
+{ lib, inputs, nixpkgs, nixpkgs-stable, disko, home-manager, wallpaperdownloader, username, autofirma-nix, sicos-config, nix-flatpak, self,... }:
 let
   # System architecture
   system = "x86_64-linux";
@@ -24,7 +24,7 @@ let
     let
       hostArg = { inherit hostName desktop; };
       themeMode = "dark";
-      themeScheme = "tokyo-city-dark";
+      themeScheme = "ayu-dark";
     in
     lib.nixosSystem {
 
