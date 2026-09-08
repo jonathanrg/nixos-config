@@ -214,6 +214,7 @@
       opencode
       nodejs
       lxqt.lxqt-policykit
+      herdr
   ];
 
   # List of programs that must be enabled
