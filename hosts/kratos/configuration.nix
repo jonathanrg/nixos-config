@@ -71,12 +71,11 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  # Creating a symlink for openjdk8 in order to configure Eclipse properly
-  system.activationScripts.jdk8-link = {
-    text = ''
-      mkdir -p /var/lib/jvm
-      ln -sfn ${pkgs-stable.jdk8}/lib/openjdk /var/lib/jvm/openjdk8
-    '';
+  # Mounting openjdk8 via bind mount so Eclipse properly recognizes it as a static path without symlink issues
+  fileSystems."/var/lib/jvm/openjdk8" = {
+    device = "${pkgs-stable.jdk8}/lib/openjdk";
+    fsType = "none";
+    options = [ "bind" "nofail" ];
   };
 
 }

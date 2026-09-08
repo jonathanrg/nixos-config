@@ -25,6 +25,7 @@ let
       hostArg = { inherit hostName desktop; };
       themeMode = "dark";
       themeScheme = "ayu-dark";
+      themeFontSize = 10;
     in
     lib.nixosSystem {
 
@@ -50,6 +51,8 @@ let
             enable = true;
             theming.enable = true;
             theming.mode = themeMode;
+            shell = "sicos-bar";
+            theming.fontSize = themeFontSize;
             theming.base16Scheme = themeScheme;
             powerManagement.enable = true;
             insync.enable = true;

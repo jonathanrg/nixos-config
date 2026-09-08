@@ -213,6 +213,7 @@
       antigravity-cli
       opencode
       nodejs
+      lxqt.lxqt-policykit
   ];
 
   # List of programs that must be enabled
