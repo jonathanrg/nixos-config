@@ -215,6 +215,7 @@
       nodejs
       lxqt.lxqt-policykit
       herdr
+      dbeaver-bin
   ];
 
   # List of programs that must be enabled

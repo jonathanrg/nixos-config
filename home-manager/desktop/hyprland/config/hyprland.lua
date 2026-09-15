@@ -372,10 +372,10 @@ hl.window_rule({
 
 
 -- Focus on activate any window
--- hl.window_rule({
---     match = { class = ".*" },
---     focus_on_activate = true,
--- })
+--hl.window_rule({
+--    match = { class = ".*" },
+--    focus_on_activate = true,
+--})
 
 hl.window_rule({
     match = { class = "^(kitty|org.gnome.Nautilus)$" },
@@ -455,6 +455,13 @@ hl.layer_rule({
 hl.layer_rule({
     match = { namespace = "^dms:.*" },
     animation = "fade",
+})
+
+-- Native blur for SicOS-Bar and QuickShell components
+hl.layer_rule({
+    match = { namespace = "^sicos:.*" },
+    blur = true,
+    ignore_alpha = 0.5,
 })
 
 -- ######################
