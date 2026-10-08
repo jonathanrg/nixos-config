@@ -211,6 +211,7 @@
       libreoffice
       antigravity-ide
       antigravity-cli
+      #pkgs-stable.opencode
       opencode
       nodejs
       lxqt.lxqt-policykit

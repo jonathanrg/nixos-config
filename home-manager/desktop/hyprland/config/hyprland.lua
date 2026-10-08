@@ -36,7 +36,7 @@ hl.on("hyprland.start", function ()
     -- Networking
     hl.exec_cmd("uwsm app -- nm-applet --indicator")
 
-    -- Shell (waybar+swaync or dank-material-shell)
+    -- Shell (waybar+swaync or sicos-bar)
     hl.exec_cmd("uwsm app -- ~/.config/sicos/scripts/start-shell.sh")
 
     -- Walker & Elephant
@@ -119,6 +119,8 @@ hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("uwsm app -- " .. webapp .. "='https:
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/sicos/scripts/sicos-settings.sh"), { description = "SicOS settings menu" })
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " --override term=xterm-256color -e lazyssh"), { description = "Lazyssh" })
 hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(menu), { description = "App Launcher (Walker)" })
+-- Same shortcut as Omarchy's clipboard manager, served by the elephant clipboard provider through walker
+hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd(menu .. " --provider clipboard"), { description = "Clipboard History (Walker)" })
 -- hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu), { description = "App Launcher (Walker)" })
 -- hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("pkill fuzzel || fuzzel"), { description = "App Launcher (Fuzzel)" })
 -- hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("pgrep -x .wofi-wrapped >/dev/null 2>&1 && killall .wofi-wrapped || " .. menu), { description = "App Launcher (Wofi)" })
@@ -129,28 +131,40 @@ hl.bind(mainMod .. " + ALT + Left", hl.dsp.window.resize({ x = -20, y = 0, relat
 hl.bind(mainMod .. " + ALT + Up", hl.dsp.window.resize({ x = 0, y = -20, relative = true }), { repeating = true, description = "Resize Current Window (Up)" })
 hl.bind(mainMod .. " + ALT + Down", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true, description = "Resize Current Window (Down)" })
 hl.bind("ALT + Tab", hl.dsp.exec_cmd("~/.config/sicos/scripts/toggle-switcher.sh"), { description = "Open Window Switcher" })
+-- Confirm-on-release is handled inside the switcher overlay itself: the
+-- overlay owns keyboard focus while open, so it receives the ALT key release
+-- directly (windowswitcher.nix, Keys.onReleased).
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("~/.config/sicos/scripts/toggle-monitormanager.sh"), { description = "Monitor Manager (Kanshi)" })
 
--- Layouts
-hl.bind(mainMod .. " + F1", function()
-    hl.config({ general = { layout = "dwindle" } })
-    hl.exec_cmd('notify-send -t 2500 -u low -r 9993 "Dwindle Layout" "Binary Tree layout enabled"')
-end, { description = "Enable Dwindle Layout" })
+-- Layouts (applied only to the active workspace, not globally)
+local function set_workspace_layout(layout)
+    return function()
+        local workspace = hl.get_active_workspace()
+        if hl.get_active_special_workspace() then
+            workspace = hl.get_active_special_workspace()
+        end
 
-hl.bind(mainMod .. " + F2", function()
-    hl.config({ general = { layout = "master" } })
-    hl.exec_cmd('notify-send -t 2500 -u low -r 9993 "Master Layout" "Master window layout enabled"')
-end, { description = "Enable Master Layout" })
+        if not workspace then
+            return
+        end
 
-hl.bind(mainMod .. " + F3", function()
-    hl.config({ general = { layout = "scrolling" } })
-    hl.exec_cmd('notify-send -t 2500 -u low -r 9993 "Scrolling Layout" "Scrolling windows layout enabled"')
-end, { description = "Enable Scrolling Layout" })
+        if workspace.special then
+            hl.workspace_rule({ workspace = tostring(workspace.name), layout = layout })
+        else
+            hl.workspace_rule({ workspace = tostring(workspace.id), layout = layout })
+        end
 
-hl.bind(mainMod .. " + F4", function()
-    hl.config({ general = { layout = "monocle" } })
-    hl.exec_cmd('notify-send -t 2500 -u low -r 9993 "Monocle Layout" "Maximized windows layout enabled"')
-end, { description = "Enable Monocle Layout" })
+        hl.exec_cmd('notify-send -t 2500 -u low -r 9993 "' .. layout .. ' Layout" "Layout applied to the active workspace"')
+    end
+end
+
+hl.bind(mainMod .. " + F1", set_workspace_layout("dwindle"), { description = "Enable Dwindle Layout (Active Workspace)" })
+
+hl.bind(mainMod .. " + F2", set_workspace_layout("master"), { description = "Enable Master Layout (Active Workspace)" })
+
+hl.bind(mainMod .. " + F3", set_workspace_layout("scrolling"), { description = "Enable Scrolling Layout (Active Workspace)" })
+
+hl.bind(mainMod .. " + F4", set_workspace_layout("monocle"), { description = "Enable Monocle Layout (Active Workspace)" })
 
 -- Volume
 -- pamixer is needed to get the volume via command line
@@ -349,6 +363,10 @@ hl.config({
 -- Animations
 hl.curve("overshot", { type = "bezier", points = { {0.13, 0.99}, {0.29, 1.1} } })
 
+-- Easing curves (taken from Omarchy) used by the special workspace transition
+hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
+hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
+
 hl.animation({ leaf = "windows", enabled = true, speed = 2, bezier = "overshot", style = "slide" })
 hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "default", style = "popin 80%" })
 hl.animation({ leaf = "border", enabled = true, speed = 3, bezier = "default" })
@@ -356,6 +374,13 @@ hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "default" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "overshot", style = "fade" })
 hl.animation({ leaf = "layersIn", enabled = true, speed = 3, bezier = "default", style = "popin" })
 hl.animation({ leaf = "layersOut", enabled = true, speed = 3, bezier = "default", style = "popin" })
+
+-- Magic workspace transition (taken from Omarchy): the special workspace rises
+-- from the bottom edge when it opens and sinks back down when it closes, the
+-- reverse of Omarchy's top-anchored Quake console. Hyprland inverts the
+-- direction for the Out animation, so the styles use opposite words.
+hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 3, bezier = "easeOutQuint", style = "slide bottom" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, bezier = "easeInOutCubic", style = "slide top" })
 
 -- ######################
 -- Window Rules - START
@@ -407,6 +432,17 @@ hl.window_rule({
 -- #######################
 -- Window Rules - FINISH
 -- #######################
+
+-- #########################
+-- Workspace Rules - START
+-- #########################
+
+-- Dwindle layout in the magic workspace (global layout is scrolling)
+hl.workspace_rule({ workspace = "special:magic", layout = "dwindle" })
+
+-- #########################
+-- Workspace Rules - FINISH
+-- #########################
 
 -- #####################
 -- Layer Rules - START
