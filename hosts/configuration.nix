@@ -58,6 +58,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable Tailscale
+  services.tailscale.enable = true;
+
   # Enable sound with pipewire.
   security.rtkit.enable = true;
   services.pipewire = {
@@ -202,7 +205,7 @@
       #pkgs-stable.eclipses.eclipse-jee
       eclipses.eclipse-jee
       jdk25
-      pkgs-stable.jdk8
+      jdk8
       fish
       kdePackages.konsole
       keepass
@@ -212,7 +215,8 @@
       antigravity-ide
       antigravity-cli
       #pkgs-stable.opencode
-      opencode
+      # OpenCode version 2 will be installed from Wes Payne's flake
+      inputs.opencode-flake.packages.x86_64-linux.opencode2-avx
       nodejs
       lxqt.lxqt-policykit
       herdr

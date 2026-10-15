@@ -61,6 +61,11 @@
       url = "github:gmodena/nix-flatpak";
     };
 
+    # Nix flake created by Wes Payne for opencode version 2
+    opencode-flake = {
+      url = "github:noblepayne/opencode-flake";
+    };
+
   };
 
   # The binary cache configuration is strongly recommended to avoid unnecessary local compilation.
@@ -83,7 +88,7 @@
   # Function that tells my flake which to use and what do what to do with the dependencies.
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, hyprswitch, wallpaperdownloader, hyprland, hyprland-plugins, ... }:
   # outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, ... }:
-  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, nix-flatpak, ... }:
+  outputs = inputs @ { self, disko, nixpkgs, nixpkgs-stable, home-manager, wallpaperdownloader, autofirma-nix, sicos-config, nix-flatpak, opencode-flake, ... }:
     # Variables
     let
       username = "jonathanrg";
@@ -96,7 +101,7 @@
           # to be defined anymore.
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager hyprswitch wallpaperdownloader hyprland hyprland-plugins username location;
           # inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username location autofirma-nix;
-          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config nix-flatpak self;
+          inherit inputs nixpkgs nixpkgs-stable disko home-manager wallpaperdownloader username autofirma-nix sicos-config nix-flatpak opencode-flake self;
         }
       );
     };
