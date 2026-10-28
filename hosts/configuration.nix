@@ -200,7 +200,7 @@
       gradia
       bluez-tools
       postman
-      buttermanager
+      pkgs-stable.buttermanager
       apache-directory-studio
       #pkgs-stable.eclipses.eclipse-jee
       eclipses.eclipse-jee
@@ -230,11 +230,17 @@
       enable = true;
       package = pkgs.jdk21;
     };
-    # AppImage
-    appimage = {
-      enable = true;
-      binfmt = true;
-    };
+    # AppImage (this configuration allows to execute an AppImage directly)
+        appimage = {
+          enable = true;
+          binfmt = true;
+          # nixpkgs removed libgcrypt and libgpg-error from appimageTools' FHS env
+          # (https://github.com/NixOS/nixpkgs/commit/3b5bba1a98148fe502ac053fce7e0af8792d07ac)
+          # but some AppImages (e.g. Navicat) still need them at runtime
+          package = pkgs.appimage-run.override {
+            extraPkgs = pkgs: [ pkgs.libgpg-error pkgs.libgcrypt ];
+          };
+        };
     # Partition manager
     partition-manager = {
       enable = true;
