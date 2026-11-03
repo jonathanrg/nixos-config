@@ -30,8 +30,9 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("systemctl --user enable --now hypridle.service")
     -- hl.exec_cmd("swayidle -w timeout 300 '$lock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$lock'")
 
-    -- Initilize wallpaper daemon
+    -- Initilize wallpaper daemon and restore cached wallpaper once outputs are settled
     hl.exec_cmd("uwsm app -- awww-daemon")
+    hl.exec_cmd("uwsm app -- sh -c 'sleep 1 && awww restore'")
 
     -- Networking
     hl.exec_cmd("uwsm app -- nm-applet --indicator")
@@ -118,7 +119,8 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("uwsm app -- " .. browser .. " --priv
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("uwsm app -- " .. webapp .. "='https://gemini.google.com/'"), { description = "Gemini" })
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/sicos/scripts/sicos-settings.sh"), { description = "SicOS settings menu" })
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " --override term=xterm-256color -e lazyssh"), { description = "Lazyssh" })
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(menu), { description = "App Launcher (Walker)" })
+-- App launcher on Super key release
+hl.bind("SUPER_L", hl.dsp.exec_cmd(menu), { release = true, description = "App Launcher (Walker)" })
 -- Same shortcut as Omarchy's clipboard manager, served by the elephant clipboard provider through walker
 hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd(menu .. " --provider clipboard"), { description = "Clipboard History (Walker)" })
 -- hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu), { description = "App Launcher (Walker)" })
@@ -309,10 +311,11 @@ hl.config({
         blur = {
             enabled = true,
             size = 4,
-            passes = 2,
+            passes = 1,
             new_optimizations = true,
             ignore_opacity = true,
             xray = false,
+            variant = "frost",
         },
 
         dim_inactive = true,
@@ -323,6 +326,13 @@ hl.config({
             range = 30,
             render_power = 3,
             color = "rgba(1a1a1aee)",
+        },
+
+        wobble = {
+            enabled = true,
+            damping = 8,
+            stiffness = 500,
+            mesh = 20,
         },
     },
 
@@ -345,6 +355,11 @@ hl.config({
     gestures = {
         -- See https://wiki.hyprland.org/Configuring/Variables/ for more
         workspace_swipe_touch = false,
+        workspace_swipe_distance = 300,
+        workspace_swipe_invert = true,
+        workspace_swipe_cancel_ratio = 0.5,
+        workspace_swipe_create_new = true,
+        workspace_swipe_forever = false,
     },
 
     misc = {
@@ -358,6 +373,26 @@ hl.config({
             sensitivity = -0.5,
         },
     },
+})
+
+-- Touchpad Gestures
+-- Enables 1:1 3-finger horizontal workspace switching
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+-- 3-finger swipe up opens SicOS workspace overview (Exposé)
+hl.gesture({
+    fingers = 3,
+    direction = "up",
+    action = function()
+        hl.exec_cmd(os.getenv("HOME") .. "/.config/sicos/scripts/toggle-overview.sh open")
+    end,
+})
+-- 3-finger swipe down closes SicOS workspace overview
+hl.gesture({
+    fingers = 3,
+    direction = "down",
+    action = function()
+        hl.exec_cmd(os.getenv("HOME") .. "/.config/sicos/scripts/toggle-overview.sh close")
+    end,
 })
 
 -- Animations
@@ -403,7 +438,7 @@ hl.window_rule({
 --})
 
 hl.window_rule({
-    match = { class = "^(kitty|org.gnome.Nautilus)$" },
+    match = { class = "^(kitty|org.gnome.Nautilus|sicos-.*)$" },
     opacity = "0.9 0.8",
 })
 
@@ -427,6 +462,12 @@ hl.window_rule({
 hl.window_rule({
     match = { class = "^(firefox|google-chrome|com.stremio.stremio)$" },
     idle_inhibit = "focus",
+})
+
+-- Only floating windows should wobble (disable wobble for tiled windows)
+hl.window_rule({
+    match = { float = false },
+    no_wobble = true,
 })
 
 -- #######################
